@@ -1,0 +1,35 @@
+﻿<Window x:Class="Nedeljni_II_Bojana_Backo.View.MasterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nedeljni_II_Bojana_Backo.View"
+        mc:Ignorable="d"
+        Title="Master Window" Background="AntiqueWhite" WindowStartupLocation="CenterScreen"
+        Height="400" Width="210" FontSize="14">
+
+    <Grid Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Grid.Row="1" Content="Create Administrator" Margin="0,10" Command="{Binding CreateAdmin}"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="Create Manager" Margin="0, 10" Command="{Binding CreateManager}"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Create Doctor" Margin="0, 10" Command="{Binding CreateDoctor}"/>
+        <Button Grid.Column="1" Grid.Row="4" Content="Create Patient" Margin="0, 10" Command="{Binding CreatePatient}"/>
+        <Button Grid.Column="1" Grid.Row="5" Content="Logout" Margin="0, 10" Command="{Binding Logout}"/>
+        <Button Grid.Column="1" Grid.Row="6" Content="Close" Margin="0, 10" Command="{Binding Close}"/>
+        <Button Grid.Column="1" Grid.Row="7" Content="Edit Account" Margin="0, 10" Command="{Binding EditAccount}"/>
+    </Grid>
+</Window>
