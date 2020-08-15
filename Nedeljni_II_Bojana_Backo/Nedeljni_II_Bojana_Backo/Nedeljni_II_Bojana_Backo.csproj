@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,10 +64,54 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DateConverter.cs" />
+    <Compile Include="ModelClinic.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelClinic.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelClinic.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelClinic.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelClinic.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordValidation.cs" />
+    <Compile Include="SecurePasswordHasher.cs" />
+    <Compile Include="Services\ServiceAdmin.cs" />
+    <Compile Include="tblClinic.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblClinicAdministrator.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblClinicDoctor.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblClinicMaintenance.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblClinicManager.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblClinicPatient.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUser.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AddAdminWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginScreenViewModel.cs" />
     <Compile Include="ViewModel\MasterWindowViewModel.cs" />
     <Compile Include="ViewModel\PredefinedWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AddAdminWindow.xaml.cs">
+      <DependentUpon>AddAdminWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
@@ -67,6 +120,21 @@
     </Compile>
     <Compile Include="View\PredefinedWindow.xaml.cs">
       <DependentUpon>PredefinedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="vwClinicAdministrator.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwClinicDoctor.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwClinicMaintenance.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwClinicManager.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwClinicPatient.cs">
+      <DependentUpon>ModelClinic.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +149,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +184,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="ModelClinic.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelClinic.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelClinic.edmx.diagram">
+      <DependentUpon>ModelClinic.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,6 +199,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelClinic.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelClinic.Context.cs</LastGenOutput>
+      <DependentUpon>ModelClinic.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelClinic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelClinic.edmx</DependentUpon>
+      <LastGenOutput>ModelClinic.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -93,9 +93,9 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
         {
             try
             {
-                //AddAdmin addAdmin = new AddAdmin();
-                //masterWindow.Close();
-                //addAdmin.ShowDialog();
+                AddAdminWindow addAdmin = new AddAdminWindow();
+                masterWindow.Close();
+                addAdmin.ShowDialog();
             }
             catch (Exception ex)
             {
