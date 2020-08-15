@@ -96,7 +96,7 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
             if (String.IsNullOrEmpty(Admin.FirstName) || String.IsNullOrEmpty(Admin.LastName)
                 || String.IsNullOrEmpty(Admin.IdentificationCard) || String.IsNullOrEmpty(Admin.Gender)
                 || String.IsNullOrEmpty(Admin.Citizenship)
-                || String.IsNullOrEmpty(Admin.Username) || String.IsNullOrEmpty((obj as PasswordBox).ToString()))
+                || String.IsNullOrEmpty(Admin.Username) || String.IsNullOrEmpty((obj as PasswordBox).Password))
             {
                 return false;
             }
