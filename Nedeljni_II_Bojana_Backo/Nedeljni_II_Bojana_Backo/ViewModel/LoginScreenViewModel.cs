@@ -224,6 +224,7 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
                 //Signup signup = new Signup();
                 //loginScreen.Close();
                 //signup.ShowDialog();
+                MessageBox.Show("Patient registration not implemented yet!");
             }
             catch (Exception ex)
             {

@@ -56,6 +56,13 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
             try
             {
                 string password = (obj as PasswordBox).Password;
+                if (!PasswordValidation.PasswordOk(password))
+                {
+                    MessageBox.Show("Password must contains at least 8 characters with " +
+                        "1 uppercase and 1 lowercase letter, 1 digit and 1 special character " +
+                        "(! @ # $ % ^ & * ( ) _ + = - [ ] { } | ; : ? / < > , .");
+                    return;
+                }
                 MasterWindow master = new MasterWindow();
                 WriteUsernameAndPasswordToFile(UserName, password);
                 predefinedWindow.Close();
