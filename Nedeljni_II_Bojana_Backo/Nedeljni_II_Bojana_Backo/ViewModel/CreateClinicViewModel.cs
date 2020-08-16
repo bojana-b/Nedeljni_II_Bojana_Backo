@@ -67,6 +67,20 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
                 OnPropertyChanged("Garden");
             }
         }
+
+        private List<tblClinic> clinicList;
+        public List<tblClinic> ClinicList
+        {
+            get
+            {
+                return clinicList;
+            }
+            set
+            {
+                clinicList = value;
+                OnPropertyChanged("ClinicList");
+            }
+        }
         #endregion
 
         #region Commands

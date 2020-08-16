@@ -29,9 +29,11 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
             clinic = new tblClinic();
             admin = new vwClinicAdministrator();
             //serviceManager = new ServiceManager();
-            serviceAdmin = new ServiceAdmin();
             serviceClinic = new ServiceClinic();
-            clinicList = serviceClinic.GetAllClinics();
+            clinicList = serviceClinic.GetAllClinics().ToList();
+            serviceAdmin = new ServiceAdmin();
+            
+            
 
             //managerPassword = new ManagerPassword();
             //managerPassword.ApplicationStarted += WriteRandomStrToFile;
@@ -173,6 +175,7 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
                     Admin = serviceAdmin.FindAdmin(UserName);
                     if (SecurePasswordHasher.Verify(password, Admin.UserPassword))
                     {
+                        clinicList = serviceClinic.GetAllClinics().ToList();
                         if (clinicList.Count == 0)
                         {
                             CreateClinic createClinic = new CreateClinic();
