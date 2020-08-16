@@ -1,4 +1,5 @@
 ﻿using Nedeljni_II_Bojana_Backo.Command;
+using Nedeljni_II_Bojana_Backo.Services;
 using Nedeljni_II_Bojana_Backo.View;
 using System;
 using System.Collections.Generic;
@@ -18,50 +19,66 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
         public static List<string> userPass;
         //ManagerPassword managerPassword;
         //ServiceManager serviceManager;
-        //SeerviceAdmin seerviceAdmin;
+        ServiceAdmin serviceAdmin;
+        ServiceClinic serviceClinic;
 
         public LoginScreenViewModel(LoginScreen loginScreenOpen)
         {
             loginScreen = loginScreenOpen;
             userPass = new List<string>();
-            //manager = new vwManager();
-            //admin = new vwAdmin();
+            clinic = new tblClinic();
+            admin = new vwClinicAdministrator();
             //serviceManager = new ServiceManager();
-            //seerviceAdmin = new SeerviceAdmin();
+            serviceAdmin = new ServiceAdmin();
+            serviceClinic = new ServiceClinic();
+            clinicList = serviceClinic.GetAllClinics();
 
             //managerPassword = new ManagerPassword();
             //managerPassword.ApplicationStarted += WriteRandomStrToFile;
             //managerPassword.WriteToFile();
         }
         #region Properties
-        //private vwManager manager;
-        //public vwManager Manager
-        //{
-        //    get
-        //    {
-        //        return manager;
-        //    }
-        //    set
-        //    {
-        //        manager = value;
-        //        OnPropertyChanged("Manager");
-        //    }
-        //}
+        private tblClinic clinic;
+        public tblClinic Clinic
+        {
+            get
+            {
+                return clinic;
+            }
+            set
+            {
+                clinic = value;
+                OnPropertyChanged("Clinic");
+            }
+        }
 
-        //private vwAdmin admin;
-        //public vwAdmin Admin
-        //{
-        //    get
-        //    {
-        //        return admin;
-        //    }
-        //    set
-        //    {
-        //        admin = value;
-        //        OnPropertyChanged("Admin");
-        //    }
-        //}
+        private vwClinicAdministrator admin;
+        public vwClinicAdministrator Admin
+        {
+            get
+            {
+                return admin;
+            }
+            set
+            {
+                admin = value;
+                OnPropertyChanged("Admin");
+            }
+        }
 
+        private List<tblClinic> clinicList;
+        public List<tblClinic> ClinicList
+        {
+            get
+            {
+                return clinicList;
+            }
+            set
+            {
+                clinicList = value;
+                OnPropertyChanged("ClinicList");
+            }
+        }
         //private tblUser user;
         //public tblUser User
         //{
@@ -151,16 +168,25 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
                 //        }
                 //    }
                 //}
-                //else if (seerviceAdmin.IsUser(UserName))
-                //{
-                //    Admin = seerviceAdmin.FindAdmin(UserName);
-                //    if (SecurePasswordHasher.Verify(password, Admin.UserPassword))
-                //    {
-                //        ManagerWindow managerWindow = new ManagerWindow();
-                //        loginScreen.Close();
-                //        managerWindow.ShowDialog();
-                //    }
-                //}
+                else if (serviceAdmin.IsUser(UserName))
+                {
+                    Admin = serviceAdmin.FindAdmin(UserName);
+                    if (SecurePasswordHasher.Verify(password, Admin.UserPassword))
+                    {
+                        if (clinicList.Count == 0)
+                        {
+                            CreateClinic createClinic = new CreateClinic();
+                            loginScreen.Close();
+                            createClinic.ShowDialog();
+                        }
+                        else
+                        {
+                            AdminWindow adminWindow = new AdminWindow();
+                            loginScreen.Close();
+                            adminWindow.ShowDialog();
+                        }
+                    }
+                }
                 else
                 {
                     MessageBox.Show("Wrong usename or password!");

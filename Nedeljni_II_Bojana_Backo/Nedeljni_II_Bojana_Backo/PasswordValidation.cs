@@ -9,75 +9,57 @@ namespace Nedeljni_II_Bojana_Backo
     // Class for Password validation
     public static class PasswordValidation
     {
-        public static bool PasswordOk(string passWord)
+        public static bool PasswordOk(string password)
         {
+            int minUpper = 1;
+            int minLower = 1;
+            int minLength = 8;
+            int minNumber = 1;
+            int minSpecial = 1;
+            char[] special = { '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=', '-', '[', ']', '{', '}', '|', ';', ':', '?', '/', '<', '>', ',', '.' };
 
-            int validConditions = 0;
+            // get individual characters
+            char[] characters = password.ToCharArray();
 
-            foreach (char c in passWord)
+            // checking variables
+            int upper = 0;
+            int length = password.Length;
+            int lower = 0;
+            int number = 0;
+            int specialChar = 0;
 
+            // check the entered password
+            foreach (char enteredCharacter in characters)
             {
-
-                if (c >= 'a' && c <= 'z')
-
+                if (char.IsUpper(enteredCharacter))
                 {
-
-                    validConditions++;
-
-                    break;
-
+                    upper = upper + 1;
                 }
-
-            }
-
-            foreach (char c in passWord)
-
-            {
-
-                if (c >= 'A' && c <= 'Z')
-
+                if (char.IsLower(enteredCharacter))
                 {
-
-                    validConditions++;
-
-                    break;
-
+                    lower = lower + 1;
                 }
-
-            }
-
-            if (validConditions == 0) return false;
-
-            foreach (char c in passWord)
-
-            {
-
-                if (c >= '0' && c <= '9')
-
+                if (char.IsDigit(enteredCharacter))
                 {
-
-                    validConditions++;
-
-                    break;
-
+                    number = number + 1;
                 }
-
+                for (int i = 0; i < special.Length; i++)
+                {
+                    if (enteredCharacter == (special[i]))
+                    {
+                        specialChar = specialChar + 1;
+                    }
+                }
             }
-
-            if (validConditions == 1) return false;
-
-            if (validConditions == 2)
-
+            if (upper < minUpper || length < minLength || specialChar < minSpecial
+                    || number < minNumber || length < minLength || lower < minLower)
             {
-
-                char[] special = { '@', '#', '$', '%', '^', '&', '+', '=' }; // or whatever
-
-                if (passWord.IndexOfAny(special) == -1) return false;
-
+                return false;
             }
-
-            return true;
-
+            else
+            {
+                return true;
+            }
         }
     }
 }

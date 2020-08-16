@@ -7,48 +7,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Nedeljni_II_Bojana_Backo.ViewModel
 {
-    class AddAdminWindowViewModel : ViewModelBase
+    class CreateClinicViewModel : ViewModelBase
     {
-        AddAdminWindow addAdminWindow;
-        ServiceAdmin serviceAdmin;
+        CreateClinic createClinic;
+        ServiceClinic serviceClinic;
 
-        public AddAdminWindowViewModel(AddAdminWindow addAdminWindowOpen)
+        public CreateClinicViewModel(CreateClinic createClinicOpen)
         {
-            addAdminWindow = addAdminWindowOpen;
-            serviceAdmin = new ServiceAdmin();
-            Admin = new vwClinicAdministrator();
+            createClinic = createClinicOpen;
+            serviceClinic = new ServiceClinic();
+            Clinic = new tblClinic();
+            Clinic.Balcony = false;
+            Clinic.Garden = false;
         }
 
         #region Properties
-        private vwClinicAdministrator admin;
-        public vwClinicAdministrator Admin
+        private tblClinic clinic;
+        public tblClinic Clinic
         {
             get
             {
-                return admin;
+                return clinic;
             }
             set
             {
-                admin = value;
-                OnPropertyChanged("Admin");
+                clinic = value;
+                OnPropertyChanged("Clinic");
             }
         }
-        private DateTime dateOfBirth = DateTime.Now;
-        public DateTime DateOfBirth
+
+        private bool balcony;
+        public bool Balcony
         {
-            get 
-            { 
-                return dateOfBirth; 
+            get
+            {
+                return balcony;
             }
-            set 
-            { 
-                dateOfBirth = value; 
-                OnPropertyChanged("DateOfBirth"); 
+            set
+            {
+                balcony = value;
+                OnPropertyChanged("Balcony");
+            }
+        }
+
+        private bool garden;
+        public bool Garden
+        {
+            get
+            {
+                return garden;
+            }
+            set
+            {
+                garden = value;
+                OnPropertyChanged("Garden");
             }
         }
         #endregion
@@ -71,20 +87,12 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
         {
             try
             {
-                string password = (obj as PasswordBox).Password;
-                if (!PasswordValidation.PasswordOk(password))
-                {
-                    MessageBox.Show("Password must contains at least 8 characters with " +
-                        "1 uppercase and 1 lowercase letter, 1 digit and 1 special character " +
-                        "(! @ # $ % ^ & * ( ) _ + = - [ ] { } | ; : ? / < > , .");
-                    return;
-                }
-                Admin.UserPassword = password;
-                Admin.DateOfBirth = dateOfBirth;
                 LoginScreen login = new LoginScreen();
-                serviceAdmin.AddAdmin(Admin);
-                addAdminWindow.Close();
-                MessageBox.Show("Account created!");
+                Clinic.Balcony = balcony;
+                Clinic.Garden = garden;
+                serviceClinic.AddClinic(Clinic);
+                createClinic.Close();
+                MessageBox.Show("Clinic created!");
                 login.ShowDialog();
             }
             catch (Exception ex)
@@ -95,10 +103,10 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
 
         private bool CanSaveExecute(object obj)
         {
-            if (String.IsNullOrEmpty(Admin.FirstName) || String.IsNullOrEmpty(Admin.LastName)
-                || String.IsNullOrEmpty(Admin.IdentificationCard) || String.IsNullOrEmpty(Admin.Gender)
-                || String.IsNullOrEmpty(Admin.Citizenship)
-                || String.IsNullOrEmpty(Admin.Username) || String.IsNullOrEmpty((obj as PasswordBox).Password))
+            if (String.IsNullOrEmpty(Clinic.ClinicName) || String.IsNullOrEmpty(Clinic.ClinicOwner)
+                || String.IsNullOrEmpty(Clinic.ClinicAddress) || Clinic.ClinicFloorNumber == 0
+                || Clinic.RoomsPerFloor == 0 || Clinic.EmergencyVehicleParkingLoots == 0
+                || Clinic.InvalidVehicleParkingLoots == 0)
             {
                 return false;
             }
@@ -125,7 +133,7 @@ namespace Nedeljni_II_Bojana_Backo.ViewModel
             try
             {
                 LoginScreen login = new LoginScreen();
-                addAdminWindow.Close();
+                createClinic.Close();
                 login.Show();
             }
             catch (Exception ex)

@@ -83,6 +83,7 @@
     <Compile Include="PasswordValidation.cs" />
     <Compile Include="SecurePasswordHasher.cs" />
     <Compile Include="Services\ServiceAdmin.cs" />
+    <Compile Include="Services\ServiceClinic.cs" />
     <Compile Include="tblClinic.cs">
       <DependentUpon>ModelClinic.tt</DependentUpon>
     </Compile>
@@ -105,12 +106,20 @@
       <DependentUpon>ModelClinic.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddAdminWindowViewModel.cs" />
+    <Compile Include="ViewModel\AdminWindowViewModel.cs" />
+    <Compile Include="ViewModel\CreateClinicViewModel.cs" />
     <Compile Include="ViewModel\LoginScreenViewModel.cs" />
     <Compile Include="ViewModel\MasterWindowViewModel.cs" />
     <Compile Include="ViewModel\PredefinedWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddAdminWindow.xaml.cs">
       <DependentUpon>AddAdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateClinic.xaml.cs">
+      <DependentUpon>CreateClinic.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
@@ -150,6 +159,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AddAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateClinic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
